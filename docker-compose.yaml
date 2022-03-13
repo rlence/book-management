@@ -3,6 +3,7 @@ services:
 
   mongo:
     image: mongo
+    container_name: mongo
     restart: always
     ports:
       - "27017:27017"
@@ -17,11 +18,13 @@ services:
       - /usr/local/app/node_modules/
       - /usr/local/share/.cache/yarn/
     command: bash -c "yarn install && yarn dev"
+    depends_on:
+      - mongo
     expose:
       - "4000"
     env_file:
        - .env.development
-       
+
   front:
     container_name: front
     build: ./front
