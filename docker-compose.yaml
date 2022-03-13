@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  back:
+    container_name: backend
+    build: ./back
+    image: node:14.0.0
+    working_dir: /usr/local/app
+    volumes:
+      - ./back/:/usr/local/app
+      - /usr/local/app/node_modules/
+      - /usr/local/share/.cache/yarn/
+    command: bash -c "yarn install && yarn dev"
+    expose:
+      - "4000"
+    environment:
+      - NODE_ENV=development
+  front:
+    container_name: front
+    build: ./front
+    ports:
+      - "3000:3000"
+    depends_on:
+      - back
+    working_dir: /usr/src/app
+    command: bash -c "yarn install && yarn start"
+    volumes:
+      - ./front:/usr/src/app 
