@@ -1,19 +1,21 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import dotenv from 'dotenv';
+import Enviroment from "./config/config.js";
 
-dotenv.config({
-    path:`.env.${process.env.NODE_ENV}`
-});
+import router from "./app/router.js";
 
+const { PORT } = Enviroment;
 const app = express();
 
+//Middleware
 app.use(cors);
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
+//Router
+router(app);
 
-app.listen(process.env.PORT, () => {
-    console.log("Server listen in PORT " + process.env.PORT);
+app.listen(PORT, () => {
+    console.log("Server listen in PORT " + PORT);
 });

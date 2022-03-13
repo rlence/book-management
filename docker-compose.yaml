@@ -1,5 +1,12 @@
 version: "3.7"
 services:
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+
   back:
     container_name: backend
     build: ./back
@@ -12,8 +19,9 @@ services:
     command: bash -c "yarn install && yarn dev"
     expose:
       - "4000"
-    environment:
-      - NODE_ENV=development
+    env_file:
+       - .env.development
+       
   front:
     container_name: front
     build: ./front
