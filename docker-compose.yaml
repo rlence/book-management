@@ -1,12 +1,13 @@
 version: "3.7"
 services:
-
-  mongo:
-    image: mongo
-    container_name: mongo
-    restart: always
+  postgres:
+    image: postgres:latest
+    container_name: postgres
     ports:
-      - "27017:27017"
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=rlence
+      - POSTGRES_PASSWORD=rlencepassword
 
   back:
     container_name: backend
@@ -19,7 +20,7 @@ services:
       - /usr/local/share/.cache/yarn/
     command: bash -c "yarn install && yarn dev"
     depends_on:
-      - mongo
+      - postgres
     expose:
       - "4000"
     env_file:
