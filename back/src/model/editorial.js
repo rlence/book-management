@@ -9,7 +9,8 @@ const Editorial = sequelize.define('Editorial', {
     },
     editorialName:{
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
    
 },{

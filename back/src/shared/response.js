@@ -6,6 +6,11 @@ const statusMessage = {
     '500': 'Internal server error'
 }
 
+export const objRes = {
+    message: "",
+    status: 500
+}
+
 export const success = (res, body, status = 200) => {
     return res.status(status).send({'body':body});
 }

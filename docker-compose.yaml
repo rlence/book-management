@@ -21,8 +21,8 @@ services:
     command: bash -c "yarn install && yarn dev"
     depends_on:
       - postgres
-    expose:
-      - "4000"
+    ports:
+      - "4000:4000"
     env_file:
        - .env.development
 

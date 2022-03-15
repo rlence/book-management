@@ -14,11 +14,11 @@ export const asyncModel =  async () => {
         Book.belongsTo(Author, { foreingKey: 'author_id' , sourceKey: 'id'});
         Book.belongsTo(Editorial, { foreingKey: 'editorial_id' , sourceKey: 'id'});
 
-        await User.sync({ force: true });
-        await Author.sync({ force: true });
-        await Editorial.sync({ force: true });
-        await Book.sync({ force: true });
-        await Bookings.sync({ force: true });
+        await User.sync({ force: false });
+        await Author.sync({ force: false });
+        await Editorial.sync({ force: false });
+        await Book.sync({ force: false });
+        await Bookings.sync({ force: false });
 
         console.info("[INFO SYNC TABLES]")
     }catch(err){
