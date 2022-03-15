@@ -1,0 +1,6 @@
+const path = required('path');
+
+module.exports = {
+    'config': path.resolve('src', 'config', 'sequelize.js')
+    'seeders-path': path.resolve('database', 'seeders')
+}
