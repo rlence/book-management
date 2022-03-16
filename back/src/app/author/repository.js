@@ -1,12 +1,11 @@
 import { Author } from "../../model/index";
-import sequelize from "../../config/sequelize";
 
 export const getAuthors = () => {
     return Author.findAll();
 }
 
 export const getAuthor = (id) => {
-    return Author.findById(id);
+    return Author.findByPk(id);
 }
 
 //@TODO fields ['authorName'] ... 

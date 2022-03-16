@@ -14,4 +14,4 @@ export const error = (res,  message, status = 500, ) => {
     return res.status(status).send({'message': message || statusMessage[status]})
 }
 
-export const errorObject = (status, message) => ({ status, message})
+export const errorObject = (status = 500, message) => Promise.reject({ status, message});

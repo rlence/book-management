@@ -7,14 +7,14 @@ const router = express.Router();
 router.get('/', (req, res) => {
     AuthorController.getAuthors()
         .then( data => success(res, data))
-        .catch( err => error(res, err ));
+        .catch( err => error(res, err.message, err.status));
 });
 
 router.get('/:id', (req, res) => {
     const id = req.params.id;
     AuthorController.getAuthor(id)
         .then( data => success(res, data))
-        .catch( err => error(res, err));
+        .catch( err => error(res, err.message, err.status));
 });
 
 router.post('/', (req, res) => {
@@ -23,6 +23,14 @@ router.post('/', (req, res) => {
         .then( data => success(res, data))
         .catch( err => error(res, err.message, err.status));
 });
+
+router.put('/:id', (req, res) => {
+    const body = req.body;
+    const id = req.params.id;
+    AuthorController.updateAuthor(id,body)
+        .then( data => success(res, data))
+        .catch( err => error(res, err.message, err.status));
+})
 
 
 export default router;
