@@ -15,7 +15,7 @@ const Bookings = sequelize.define('Bookings', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    pipkUpDate:{
+    pickUpDate:{
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW
@@ -24,11 +24,6 @@ const Bookings = sequelize.define('Bookings', {
         type: DataTypes.DATE,
         allowNull: false
     },
-    isDelivered:{
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false
-    },
     dateDelivered: {
         type: DataTypes.DATE,
         allowNull: true
@@ -36,7 +31,7 @@ const Bookings = sequelize.define('Bookings', {
    
 },{
     tableName: 'bookings',
-    timestamps: false,
+    timestamps: true,
 });
 
 export default Bookings;

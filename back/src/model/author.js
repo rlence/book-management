@@ -7,14 +7,23 @@ const Author = sequelize.define('Author', {
         autoIncrement: true,
         primaryKey: true
     },
-    authorName:{
+    name:{
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
     },
+    lastname:{
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    is_active: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
+    }
+
 },{
     tableName: 'author',
-    timestamps: false,
+    timestamps: true,
 });
 
 export default Author;

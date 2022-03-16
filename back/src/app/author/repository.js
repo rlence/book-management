@@ -8,7 +8,6 @@ export const getAuthor = (id) => {
     return Author.findByPk(id);
 }
 
-//@TODO fields ['authorName'] ... 
 export const createAuthor = async (newAuthor) => {
     return Author.create(newAuthor)
 }

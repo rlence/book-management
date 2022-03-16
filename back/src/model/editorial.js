@@ -12,10 +12,15 @@ const Editorial = sequelize.define('Editorial', {
         allowNull: false,
         unique: true
     },
+    is_active: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
+    }
    
 },{
     tableName: 'editorial',
-    timestamps: false,
+    timestamps: true,
 });
 
 export default Editorial;

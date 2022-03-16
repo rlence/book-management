@@ -25,13 +25,13 @@ export const getAuthor = async (id) => {
 
 export const createAuthor =  async (body) => {
     try{
-        const { authorName } = body;
+        const { name, lastname } = body;
 
-        if(!authorName){
+        if(!name || !lastname){
             return errorObject(400);
         }
 
-        return await AuhtorRepository.createAuthor(body);
+        return await AuhtorRepository.createAuthor({name, lastname});
 
     }catch(err){
         console.log('[ERROR CREATE AUTHOR]: ', err);
@@ -45,10 +45,9 @@ export const createAuthor =  async (body) => {
 export const updateAuthor = async (id, body) => {
     try{
 
-        const { authorName } = body;
+        const {  name, lastname } = body;
 
-        if(!authorName){
-            console.log('estoy aqui')
+        if(!name || !lastname){
             return errorObject(400);
         }
         
@@ -56,7 +55,7 @@ export const updateAuthor = async (id, body) => {
         if(!author){
             return "author not found"
         }
-        const authorUpdate = await AuhtorRepository.updateAuthor(author, {authorName});
+        const authorUpdate = await AuhtorRepository.updateAuthor(author, {name, lastname});
         return authorUpdate;
 
     }catch(err){

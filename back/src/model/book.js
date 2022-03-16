@@ -7,33 +7,34 @@ const Book = sequelize.define('Book', {
         autoIncrement: true,
         primaryKey: true
     },
-    bookName:{
+    title:{
         type: DataTypes.STRING,
         allowNull: false
     },
-    gender:{
+    genre:{
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    amount:{
-        type: DataTypes.INTEGER,
         allowNull: false
     },
     publicationDate:{
         type: DataTypes.DATE,
         allowNull: false
     },
-    authorId:{
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
     editorialId:{
         type: DataTypes.INTEGER,
+        allowNull: true,
+    },
+    status:{
+        type: DataTypes.STRING,
         allowNull: false,
     },
+    is_active: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
+    }
 },{
     tableName: 'book',
-    timestamps: false,
+    timestamps: true,
 });
 
 
