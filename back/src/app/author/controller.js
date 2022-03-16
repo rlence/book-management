@@ -35,9 +35,6 @@ export const createAuthor =  async (body) => {
 
     }catch(err){
         console.log('[ERROR CREATE AUTHOR]: ', err);
-        if(err.errors[0]?.message == "author_name must be unique"){
-            return errorObject(409, "the author already exists");
-        }
         return errorObject(500);
     }
 }
@@ -60,9 +57,6 @@ export const updateAuthor = async (id, body) => {
 
     }catch(err){
         console.log('[ERROR UPDATE AUTHOR]: ', err);
-        if(err.errors[0]?.message == "author_name must be unique"){
-            return errorObject(409, "the author already exists");
-        }
         return errorObject(500);;
     }
 }

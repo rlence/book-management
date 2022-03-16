@@ -1,7 +1,7 @@
 import { Editorial } from "../../model/index";
 
 export const getEditorial = (id) => {
-    return Editorial.findById(id);
+    return Editorial.findByPk(id);
 }
 
 export const listEditorial = () => {
@@ -12,7 +12,7 @@ export const createEditorial = (newEditorial) => {
     return Editorial.create(newEditorial);
 }
 
-export const updateEditorial = (editorial, data) => {
+export const updateEditorial = async  (editorial, data) => {
     await editorial.update(data);
     await editorial.save();
     return editorial;

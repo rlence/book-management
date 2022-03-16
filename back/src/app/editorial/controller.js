@@ -16,7 +16,7 @@ export const getEditorial = async (id) => {
 
 export const getAllEditorial = async () => {
  try {
-    return await EditorialRepository.getAllEditorial();
+    return await EditorialRepository.listEditorial();
  }catch(err){
     console.log("[ERROR GET ALL EDITORIAL]:", err);
     return errorObject(500);
@@ -59,15 +59,6 @@ export const updateEditorial = async (body, editorialId) => {
         if(err.errors[0]?.message == "editorial_name must be unique"){
             return errorObject(409, "the editorial already exists");
         }
-        return errorObject(500);
-    }
-}
-
-export const deletedEditorial = async (editorialId) => {
-    try{
-        
-
-    }catch(err){
         return errorObject(500);
     }
 }

@@ -32,7 +32,4 @@ router.put('/:id', (req, res) => {
         .catch( err => error(res, err.message, err.status));
 });
 
-router.delete('/:id', (req, res) => {
-    const id = req.params.id;
-
-});
+export default router;
