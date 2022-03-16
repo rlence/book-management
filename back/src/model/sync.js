@@ -20,7 +20,6 @@ export const asyncModel =  async () => {
         await Book.sync({ force: false });
         await Bookings.sync({ force: false });
 
-        console.info("[INFO SYNC TABLES]")
     }catch(err){
         console.log("[ERROR ASYNC MODEL]:", err)
     }

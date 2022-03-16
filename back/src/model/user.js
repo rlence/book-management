@@ -17,15 +17,18 @@ const User = sequelize.define('User', {
     },
     email:{
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     phone:{
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     nif:{
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     }
    
 },{

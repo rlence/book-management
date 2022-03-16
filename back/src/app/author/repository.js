@@ -11,16 +11,7 @@ export const getAuthor = (id) => {
 
 //@TODO fields ['authorName'] ... 
 export const createAuthor = async (newAuthor) => {
-    const t = await sequelize.transaction();
-    try{
-        const author = await Author.create(newAuthor, {transaction: t})
-        await t.commit();
-        return Promise.resolve(author);
-    }catch(err){
-        await t.rollback();
-        console.error('[ERROR REPOSITOY AUTHOR CREATE]: ', err);        
-        return Promise.reject(err);
-    }
+    return Author.create(newAuthor)
 }
 
 export const updateAuthor = async  (author, data) => {

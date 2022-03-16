@@ -1,5 +1,5 @@
 import * as AuhtorRepository from "./repository";
-import { objRes } from "../../shared/response";
+import { errorObject } from "../../shared/response";
 
 export const getAuthors =  async () => {
     try{
@@ -15,7 +15,7 @@ export const getAuthor = async (id) => {
         return AuhtorRepository.getAuthor(id);
     }catch(err){
         console.log('[ERROR GET AUTHOR]: ', err);
-        return Promise.reject(500);
+        return Promise.reject(errorObject(500));
     }
 }
 
@@ -24,19 +24,16 @@ export const createAuthor =  async (body) => {
         const { authorName } = body;
 
         if(!authorName){
-            return Promise.reject(400);
+            return Promise.reject();
         }
 
-        const author =  await AuhtorRepository.createAuthor(body);
-        return Promise.resolve(author);
+        return await AuhtorRepository.createAuthor(body);
 
     }catch(err){
         console.log('[ERROR CREATE AUTHOR]: ', err);
         if(err.errors[0]?.message == "author_name must be unique"){
-            objRes.message = "the author already exists",
-            objRes.status = 409
-            return Promise.reject(objRes)
+            return Promise.reject(errorObject(500, "the author already exists"));
         }
-        return Promise.reject(500);
+        return Promise.reject(errorObject(500));
     }
 }

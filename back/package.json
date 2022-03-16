@@ -7,7 +7,8 @@
     "build": "babel src --out-dir dist",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js --exec babel-node",
-    "docker-exec": "docker exec -it postgres psql -U rlence"
+    "docker-exec": "docker exec -ti backend /bin/bash",
+    "docker-exec-psql": "docker exec -it postgres psql -U rlence"
   },
   "keywords": [],
   "author": "",
