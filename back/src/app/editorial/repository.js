@@ -17,3 +17,11 @@ export const updateEditorial = async  (editorial, data) => {
     await editorial.save();
     return editorial;
 }
+
+export const deletedEditorial = (editorialId) => {
+    return Editorial.destroy({
+        where: {
+            id: editorialId
+        }
+    });
+}

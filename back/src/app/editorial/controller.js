@@ -56,9 +56,28 @@ export const updateEditorial = async (body, editorialId) => {
         return await EditorialRepository.updateEditorial(editorial, {editorialName});
 
     }catch(err){
+        console.log("[ERROR UPDATE EDITORIAL]:", err);
         if(err.errors[0]?.message == "editorial_name must be unique"){
             return errorObject(409, "the editorial already exists");
         }
+        return errorObject(500);
+    }
+}
+
+export const deletedEditorial = async (editorialId) => {
+    try{
+        const deletedEditorial = await EditorialRepository.deletedEditorial(editorialId);
+        if(!deletedEditorial){
+            return errorObject(404, "Editorial not found");
+        }
+
+        return{
+            id: editorialId,
+            message: "Editorial deleted"
+        }
+
+    }catch(err){
+        console.log("[ERROR DELETE EDITORIAL]:", err);
         return errorObject(500);
     }
 }
