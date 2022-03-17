@@ -36,4 +36,4 @@ services:
     working_dir: /usr/src/app
     command: bash -c "yarn install && yarn start"
     volumes:
-      - ./front:/usr/src/app 
+      - ./front:/usr/src/app

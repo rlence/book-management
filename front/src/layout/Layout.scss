@@ -1,0 +1,14 @@
+@use "../App.scss" as a;
+
+.layout {
+
+    height: 100vh;
+
+    .nav-bar{
+        background-color: a.$color-button
+    }
+    
+    .content{
+        background-color: red;
+    }
+}
