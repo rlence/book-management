@@ -21,4 +21,12 @@ export const deleteAuthorOfTheBooks = (authorId, t) => {
     }, { transaction: t })
 }
 
+export const deleteBook = (bookId, t) => {
+    return BookAuthor.destroy({
+        where:{
+            bookId
+        }
+    }, { transaction: t });
+}
+
 

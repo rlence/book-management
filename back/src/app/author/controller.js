@@ -66,19 +66,20 @@ export const updateAuthor = async (id, body) => {
 export const deletedAuthor = async (authorId) => {
     try{
         const t = await sequelize.transaction();    
-        await BookAuthorRepository.deleteAuthorOfTheBooks(authorId);
-        const authorDeleted = await AuhtorRepository.deleteAuthor(authorId);
+        await BookAuthorRepository.deleteAuthorOfTheBooks(authorId, t);
+        const authorDeleted = await AuhtorRepository.deleteAuthor(authorId, t);
         if(!authorDeleted){
             return errorObject(404, "The author not exist");
         }
-
+        t.commit()
         return {
             id: authorId,
             message: "Author is deleted"
         }
-
+        
     }catch(err){
         console.log('[ERROR DELETE AUTHOR]: ', err);
+        await t.rollback();
         return errorObject(500);
     }
 }

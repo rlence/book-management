@@ -32,10 +32,10 @@ export const updateBook = async  (book, data) => {
     return book;
 }
 
-export const deletedBook =  async (id) => {
+export const deletedBook =  async (id, t) => {
     return await Book.destroy({
         where:{
             id: id
         }
-    })
+    }, { transaction: t })
 }

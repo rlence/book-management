@@ -115,17 +115,20 @@ export const updateBook = async (body, bookId) => {
 
 export const  deleteBook = async (id) => {
     try{
+        const t = await sequelize.transaction();
+        await BookAutorRopository.deleteBook(id);
         const deleteBook =  await BookRepository.deletedBook(id);
         if(!deleteBook){
-            return "Not book find to deleted"
+            return errorObject(404, "Not book find to deleted")
         }
-
+        await t.commit();
         return {
             id,
             message: "Book deleted"
         }
 
     }catch(err){
+        await t.rollback();
         console.error('[ERROR DELETED BOOK]:', err);
         return errorObject(500);
     }
