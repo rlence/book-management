@@ -26,6 +26,7 @@ const Book = sequelize.define('Book', {
     status:{
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: "available"
     },
     is_active: {
         type: DataTypes.BOOLEAN,
