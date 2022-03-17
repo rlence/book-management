@@ -4,11 +4,12 @@
 
     height: 100vh;
 
-    .nav-bar{
-        background-color: a.$color-button
+    .aside-menu{
+        background-color: a.$backGroudNav;
+        padding-right: 0px;
     }
     
     .content{
-        background-color: red;
+        background-color: a.$backGround;
     }
 }

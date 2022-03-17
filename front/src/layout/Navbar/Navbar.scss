@@ -1,0 +1,49 @@
+@use "../../App.scss" as a;
+
+$heigthLogo: 200px;
+
+.nav-bar{
+    width: 100%;
+
+    .column{
+        display: flex;
+        flex-direction: column;
+    }
+
+    height: a.$maxHeig;
+
+    .logo{
+        width: 100%;
+        height: $heigthLogo;
+    }
+
+    .nav-menu{
+        width: 100%;
+        
+
+        .active{
+            color: a.$textSecond !important;
+            background-color: a.$optional2;
+        }
+    
+        .link{  
+            display: table;
+            text-decoration: none;
+            color: a.$textFirst;
+            text-align: left;
+            padding-left: 20px;
+            height: 40px;
+            
+            span{
+                display: table-cell;
+                vertical-align: middle;
+            }
+        }
+
+        .link:hover{
+            color: a.$optional1;
+        }
+    }
+
+    
+}
