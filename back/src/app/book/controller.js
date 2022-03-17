@@ -111,3 +111,21 @@ export const updateBook = async (body, bookId) => {
     }
     
 }
+
+export const  deleteBook = async (id) => {
+    try{
+        const deleteBook =  await BookRepository.deletedBook(id);
+        if(!deleteBook){
+            return "Not book find to deleted"
+        }
+
+        return {
+            id,
+            message: "Book deleted"
+        }
+
+    }catch(err){
+        console.error('[ERROR DELETED BOOK]:', err);
+        return errorObject(500);
+    }
+}

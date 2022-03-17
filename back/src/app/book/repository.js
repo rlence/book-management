@@ -35,3 +35,11 @@ export const updateBook = async  (book, data) => {
 export const createRelationBookAuthor = (newBookAuthor, t) => {
     return BookAuthor.bulkCreate(newBookAuthor, { transaction: t });
 }
+
+export const deletedBook =  async (id) => {
+    return await Book.destroy({
+        where:{
+            id: id
+        }
+    })
+}
