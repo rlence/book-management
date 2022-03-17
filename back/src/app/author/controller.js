@@ -1,5 +1,7 @@
 import * as AuhtorRepository from "./repository";
+import * as BookAuthorRepository from "../bookAuthor/repository";
 import { errorObject } from "../../shared/response";
+import sequelize from '../../config/sequelize';
 
 export const getAuthors =  async () => {
     try{
@@ -57,6 +59,26 @@ export const updateAuthor = async (id, body) => {
 
     }catch(err){
         console.log('[ERROR UPDATE AUTHOR]: ', err);
-        return errorObject(500);;
+        return errorObject(500);
+    }
+}
+
+export const deletedAuthor = async (authorId) => {
+    try{
+        const t = await sequelize.transaction();    
+        await BookAuthorRepository.deleteAuthorOfTheBooks(authorId);
+        const authorDeleted = await AuhtorRepository.deleteAuthor(authorId);
+        if(!authorDeleted){
+            return errorObject(404, "The author not exist");
+        }
+
+        return {
+            id: authorId,
+            message: "Author is deleted"
+        }
+
+    }catch(err){
+        console.log('[ERROR DELETE AUTHOR]: ', err);
+        return errorObject(500);
     }
 }

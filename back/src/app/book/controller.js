@@ -1,6 +1,7 @@
 import * as BookRepository from './repository';
 import * as EditorialRepository from "../editorial/repository";
 import * as AuthorsRepository from "../author/repository";
+import * as BookAutorRopository from "../bookAuthor/repository";
 import sequelize from '../../config/sequelize';
 import moment from "moment";
 
@@ -63,7 +64,7 @@ export const createBook = async (body) => {
         }
         const book = await BookRepository.creatBook(newBook, t);
         const newBookAuthot = authorsId.map(author => ({bookId: book.id, authorId: author}) );
-        await BookRepository.createRelationBookAuthor(newBookAuthot, t);
+        await BookAutorRopository.createRelationBookAuthor(newBookAuthot, t);
         await t.commit();
         return newBook;
         

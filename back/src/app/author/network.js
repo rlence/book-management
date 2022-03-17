@@ -30,7 +30,14 @@ router.put('/:id', (req, res) => {
     AuthorController.updateAuthor(id,body)
         .then( data => success(res, data))
         .catch( err => error(res, err.message, err.status));
-})
+});
+
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    AuthorController.deletedAuthor(id)
+        .then( data => success(res, data))
+        .catch( err => error(res, err.message, err.status));
+});
 
 
 export default router;

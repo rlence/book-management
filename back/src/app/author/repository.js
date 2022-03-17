@@ -28,4 +28,12 @@ export const getAuthorsByIds = (listIds) => {
     } });
 }
 
+export const deleteAuthor = (authorId) => {
+    return Author.destroy({
+        where:{
+            id: authorId
+        }
+    })
+}
+
 
