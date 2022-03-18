@@ -16,12 +16,13 @@ export const getBooks = async () => {
             title: book.title,
             is_active: book.is_active,
             editorial: book.Editorial,
-            authors: book.BookAutors.map( author => ({
+            authors: book.BookAutors.length === 0 ? null : book.BookAutors.map( author => ({
                 id: author.Author.id,
                 name: author.Author.name,
                 lastname: author.Author.lastname,
             }))
         }));
+        console.log(listBook)
         return Promise.resolve(listBook);
 
     }catch(err){

@@ -1,4 +1,11 @@
 import {Author, Editorial, User, Book, Bookings, BookAuthor} from "./index";
+import sequelize from "../config/sequelize";
+import seed from "../seed";
+import Enviroment from "../config/config";
+
+const { ENVIROMENT } = Enviroment;
+
+const forceSequileze = ENVIROMENT === "development" ? true : false;
 
 export const asyncModel =  async () => {
     try{
@@ -16,13 +23,12 @@ export const asyncModel =  async () => {
 
         BookAuthor.belongsTo(Author, { foreingKey: 'book_id' , sourceKey: 'id'});
         Author.hasMany(BookAuthor, {foreingKey: 'book_id' , sourceKey: 'id'});
-       
-        await User.sync({ force: false });
-        await Author.sync({ force: false });
-        await Editorial.sync({ force: false });
-        await Book.sync({ force: false });
-        await Bookings.sync({ force: false });
-        await BookAuthor.sync({ force: false });
+
+        await sequelize.sync({ force: forceSequileze });
+        if(ENVIROMENT === "development"){
+            await seed();
+        }
+        
 
     }catch(err){
         console.log("[ERROR ASYNC MODEL]:", err)

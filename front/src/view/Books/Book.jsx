@@ -44,6 +44,7 @@ const Book = () => {
     },{
         title: "Editorial",
         type:"editorial",
+        extra: ["editorialName"]
     },{
         title: "Authors",
         type:"authors",

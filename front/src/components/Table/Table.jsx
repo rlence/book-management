@@ -5,6 +5,7 @@ import "./Table.scss";
 const Table = ({ columns, dataSource }) => {
 
   const validateTypeData = (source, extra, id) => {
+    
     if (Array.isArray(source)) {
       return source.map((data, index) => (
         <p key={index}>
@@ -16,13 +17,17 @@ const Table = ({ columns, dataSource }) => {
     }
 
     if(typeof extra === "function"){
-        return extra(id)
+      return extra(id)
     }
 
     if (!source) {
       return "-";
     }
-
+    
+    if(typeof source == "object"){
+      return source[extra[0]]
+    }
+    
     return source;
   };
 
