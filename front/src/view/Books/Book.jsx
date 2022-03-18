@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./Book.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+
 
 import moment from "moment";
 
+import Table from "../../components/Table/Table";
 import Card from "../../components/Card/Card";
 import Spinner from "../../components/Spinner/Spinner";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { getBooks, deletedBook } from "../../service/book";
 
@@ -21,10 +24,49 @@ const Book = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(initialStateError);
 
-    const headTable = ["id", "Title", "Genre", "Publication Date", "Editorial", "Authors", "Status"];
+    const handelBookDelete = (id) => {
+       console.log({id})
+    }
+
+    const columns = [{
+        title: "id",
+        type: "id"
+    },{
+        title: "Title",
+        type: "title",
+    },{
+        title: "Genre",
+        type: "genre",
+    },{
+        title: "Publication Date",
+        type:"publicationDate",
+    },{
+        title: "Editorial",
+        type:"editorial",
+    },{
+        title: "Authors",
+        type:"authors",
+        extra:["name", "lastname"]
+    },{
+        title: "Status",
+        type:"status",
+    },{
+        title: "",
+        type: "",
+        extra: (id) => (
+            <>
+                <span className="separation">
+                    <FontAwesomeIcon onClick={() => handelBookDelete(id)} icon={faPen} />
+                </span>
+                <span className="separation">
+                    <FontAwesomeIcon onClick={() => handelBookDelete(id)} icon={faTrash} />
+                </span>
+            </>
+        )
+    }
+    ];
 
     useEffect(() => {
-        console.log("get book")
         getBooks()
             .then(response => response.json())
             .then( data => {
@@ -36,7 +78,11 @@ const Book = () => {
                     title: book.title,
                     is_active: book.is_active,
                     editorial: book.Editorial,
-                    authors: book.BookAutors
+                    authors: book.BookAutors.map( author => ({
+                        id: author.Author.id,
+                        name: author.Author.name,
+                        lastname: author.Author.lastname,
+                    }))
                 }));
                 setBooks(listBook);
             })
@@ -46,24 +92,7 @@ const Book = () => {
             .finally(() => setLoading(false));
     },[]);
 
-    const handelBookDelete = (id) => {
-        deletedBook(1)
-            .then( res =>res.json())
-            .catch(err => {
-                console.log(err, "errR")
-                if(err.status === 500){
-                    setError({status:true, message:"Ops! se produjo un error"})
-                }
-                setError({status:true, message:err.message})
-            });
-    }
-
-    const printAuhtors = (authors) => {
-        return authors.map( author => <>
-            <span className="separation">{author.Author.name}</span>
-            <span className="separation">{author.Author.lastname}</span>
-        </> )
-    }
+    
 
     console.log(error)
     return(
@@ -71,38 +100,7 @@ const Book = () => {
             <h1>Book</h1>
             { !loading ? <div>
                 <Card>
-                    <table className="table tabale-book">
-                        <thead>
-                            <tr>
-                                {headTable.map( head => <th key={head} scope="col">{head}</th>)}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {books.map( book => (
-                                <tr key={book.id}>
-                                    <td>{book.id}</td>
-                                    <td>{book.title}</td>
-                                    <td>{book.genre}</td>
-                                    <td>{book.publicationDate}</td>
-                                    <td>{book.editorial ? book.editorial : "-"}</td>
-                                    <td>{book.authors ? printAuhtors(book.authors) : "-"}</td>
-                                    <td>
-                                        <div className={book.status}>
-                                            {book.status}
-                                        </div>
-                                    </td>
-                                    <td>
-                                       <span className="separation">
-                                            <FontAwesomeIcon onClick={() => handelBookDelete(book.id)} icon={faPen} />
-                                       </span>
-                                        <span className="separation">
-                                            <FontAwesomeIcon onClick={() => handelBookDelete(book.id)} icon={faTrash} />
-                                        </span>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <Table columns={columns} dataSource={books}  />
                 </Card>
                 
             </div> :

@@ -1,0 +1,18 @@
+@use "../../App.scss" as a;
+
+.t-content{
+    color: a.$textSecond;
+    text-align: center;
+
+    .separation{
+        margin-right: 0.5rem;
+
+        p{
+            margin: 0px;
+        }
+    }
+
+    .separation:hover{
+        cursor: pointer;
+    }
+}
