@@ -24,7 +24,7 @@ services:
     ports:
       - "4000:4000"
     env_file:
-       - .env.development
+       - .env
 
   front:
     container_name: front
