@@ -10,16 +10,16 @@ const Navbar = () => {
                 logo
             </div>
             <div className="nav-menu column">
-                <NavLink className="link" exact to="/" activeClassName="active">
+                <NavLink className="link" exact={"true"} to="/">
                     <span>Home</span>
                 </NavLink>
-                <NavLink className="link" exact to="/book" activeClassName="active">
+                <NavLink className="link" exact={"true"} to="/book">
                     <span>Book</span>
                 </NavLink>
-                <NavLink className="link" to="/author" activeClassName="active">
+                <NavLink className="link" exact={"true"} to="/author">
                     <span>Author</span>
                 </NavLink>
-                <NavLink className="link" to="/editorial" activeClassName="active">
+                <NavLink className="link" exact={"true"} to="/editorial">
                     <span>Editorial</span>
                 </NavLink>
             </div>

@@ -1,0 +1,31 @@
+@use "../../App.scss" as a;
+
+.book-content{
+    width: 100%;
+    padding: 5rem;
+
+    .tabale-book{
+        color: a.$textSecond;
+        text-align: center;
+    }
+
+    .separation{
+        margin-right: 1rem;
+    }
+
+    .icon-click:hover{
+        cursor: pointer;
+    }
+
+    .available{
+        background-color: a.$succes;
+        border-radius: .5rem;
+    }
+
+    .reserved{
+        background-color: a.$error;
+        border-radius: .5rem;
+        color: a.$textFirst;
+    }
+
+}

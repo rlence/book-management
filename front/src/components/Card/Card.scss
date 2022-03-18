@@ -1,0 +1,10 @@
+@use "../../App.scss" as a;
+
+.card-content {
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    background-color:  a.$backGroundTable;
+    display: table;
+    width: 100%;
+}

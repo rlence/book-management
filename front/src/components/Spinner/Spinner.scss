@@ -1,0 +1,11 @@
+@use "../../App.scss" as a;
+
+.spinner-content{
+    text-align:  center;
+    display: table-cell;
+    vertical-align: middle;
+
+    div{
+        color: a.$backGroudNav;
+    }
+}
