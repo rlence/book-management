@@ -1,7 +1,7 @@
 import { Book, BookAuthor, Author, Editorial } from "../../model/index";
 
-export const createRelationBookAuthor =  (newBookAuthor, t) => {
-    return BookAuthor.bulkCreate(newBookAuthor, { transaction: t });
+export const createRelationBookAuthor =  (newBookAuthor) => {
+    return BookAuthor.bulkCreate(newBookAuthor);
 }
 
 export const deleteAuthorOfTheBook = (bookId, authorId) => {
@@ -13,20 +13,20 @@ export const deleteAuthorOfTheBook = (bookId, authorId) => {
     });
 }
 
-export const deleteAuthorOfTheBooks = (authorId, t) => {
+export const deleteAuthorOfTheBooks = (authorId) => {
     return BookAuthor.destroy({
         where:{
             authorId
         }
-    }, { transaction: t })
+    })
 }
 
-export const deleteBook = (bookId, t) => {
+export const deleteBook = (bookId) => {
     return BookAuthor.destroy({
         where:{
             bookId
         }
-    }, { transaction: t });
+    });
 }
 
 

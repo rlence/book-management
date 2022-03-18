@@ -6,10 +6,10 @@ const Table = ({ columns, dataSource }) => {
 
   const validateTypeData = (source, extra, id) => {
     if (Array.isArray(source)) {
-      return source.map((data) => (
-        <p>
+      return source.map((data, index) => (
+        <p key={index}>
           {extra.map((type) => (
-            <span className="separation"> {data[type]} </span>
+            <span key={type} className="separation"> {data[type]} </span>
           ))}
         </p>
       ));
@@ -38,8 +38,8 @@ const Table = ({ columns, dataSource }) => {
       <tbody>
         {dataSource.map((data) => (
           <tr key={data.id}>
-            {columns.map((column) => (
-              <td>{validateTypeData(data[column.type], column.extra, data.id)}</td>
+            {columns.map((column, index) => (
+              <td key={index}>{validateTypeData(data[column.type], column.extra, data.id)}</td>
             ))}
           </tr>
         ))}

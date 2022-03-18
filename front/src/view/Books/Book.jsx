@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./Book.scss";
 
-
-import moment from "moment";
-
 import Table from "../../components/Table/Table";
 import Card from "../../components/Card/Card";
 import Spinner from "../../components/Spinner/Spinner";
+import Alert from "../../components/Alert/Alert";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -24,8 +22,16 @@ const Book = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(initialStateError);
 
-    const handelBookDelete = (id) => {
-       console.log({id})
+    const handelBookDelete = async (id) => {
+        try{
+            const data = await deletedBook(1);
+            console.log(data)
+          
+        }catch(err){
+            console.log(err, "en el error")
+            setError({status: true, message: err});
+        }
+      
     }
 
     const columns = [{
@@ -68,36 +74,17 @@ const Book = () => {
 
     useEffect(() => {
         getBooks()
-            .then(response => response.json())
-            .then( data => {
-                const listBook = data.body.map(book => ({
-                    id: book.id,
-                    genre: book.genre,
-                    publicationDate: moment(book.publicationDate).format("DD-MM-YYYY"),
-                    status: book.status,
-                    title: book.title,
-                    is_active: book.is_active,
-                    editorial: book.Editorial,
-                    authors: book.BookAutors.map( author => ({
-                        id: author.Author.id,
-                        name: author.Author.name,
-                        lastname: author.Author.lastname,
-                    }))
-                }));
-                setBooks(listBook);
-            })
-            .catch( err => {
-                console.log(err, "err");
-            })
+            .then(data => setBooks(data))
+            .catch( () => setError({status: true, message: "An error has occurred, try again later"}))
             .finally(() => setLoading(false));
     },[]);
-
-    
-
     console.log(error)
     return(
         <div className="book-content">
-            <h1>Book</h1>
+            { error.status ? <Alert text={error.message} type="error"/>: null }
+            <div>
+                <h1>Books</h1>
+            </div>
             { !loading ? <div>
                 <Card>
                     <Table columns={columns} dataSource={books}  />

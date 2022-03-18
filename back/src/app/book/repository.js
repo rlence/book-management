@@ -22,8 +22,8 @@ export const getBooks = () => {
     });
 }
 
-export const creatBook = (newBook, t) => {
-    return Book.create(newBook, { transaction: t })
+export const creatBook = (newBook) => {
+    return Book.create(newBook)
 }
 
 export const updateBook = async  (book, data) => {
@@ -32,10 +32,10 @@ export const updateBook = async  (book, data) => {
     return book;
 }
 
-export const deletedBook =  async (id, t) => {
+export const deletedBook =  async (id) => {
     return await Book.destroy({
         where:{
             id: id
         }
-    }, { transaction: t })
+    })
 }

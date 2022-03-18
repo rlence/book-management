@@ -1,0 +1,18 @@
+@use "../../App.scss" as a;
+
+.error{
+    background-color: a.$error;
+    border-color:  a.$error;
+    color: a.$textFirst;
+}
+
+.succes{
+    background-color: a.$succes;
+    border-color:  a.$succes;
+    color: a.$textFirst;
+}
+
+.aler-content{
+    width: 50%;
+    margin: auto;
+}

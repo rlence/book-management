@@ -2,7 +2,6 @@ import * as BookRepository from './repository';
 import * as EditorialRepository from "../editorial/repository";
 import * as AuthorsRepository from "../author/repository";
 import * as BookAutorRopository from "../bookAuthor/repository";
-import sequelize from '../../config/sequelize';
 import moment from "moment";
 
 import { errorObject } from "../../shared/response";
@@ -28,7 +27,6 @@ export const getAllBook = () => {
 }
 
 export const createBook = async (body) => {
-    const t = await sequelize.transaction();
     try{
         const {title, genre, publicationDate,  editorialId, authorsId } = body;
 
@@ -62,15 +60,14 @@ export const createBook = async (body) => {
             publicationDate:date,
             editorialId
         }
-        const book = await BookRepository.creatBook(newBook, t);
+        const book = await BookRepository.creatBook(newBook);
         const newBookAuthot = authorsId.map(author => ({bookId: book.id, authorId: author}) );
-        await BookAutorRopository.createRelationBookAuthor(newBookAuthot, t);
+        await BookAutorRopository.createRelationBookAuthor(newBookAuthot);
         await t.commit();
         return newBook;
         
     }catch(err){
         console.log("[ERROR CREATE BOOK]:", err);
-        await t.rollback();
         return errorObject(500);
     }
 }
@@ -115,7 +112,6 @@ export const updateBook = async (body, bookId) => {
 
 export const  deleteBook = async (id) => {
     try{
-        const t = await sequelize.transaction();
         await BookAutorRopository.deleteBook(id);
         const deleteBook =  await BookRepository.deletedBook(id);
         if(!deleteBook){
@@ -128,7 +124,6 @@ export const  deleteBook = async (id) => {
         }
 
     }catch(err){
-        await t.rollback();
         console.error('[ERROR DELETED BOOK]:', err);
         return errorObject(500);
     }
