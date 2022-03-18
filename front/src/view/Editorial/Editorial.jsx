@@ -2,10 +2,7 @@ import React, {useEffect, useState} from "react";
 import "../../App.scss";
 
 import Content from "../../components/Content/Content";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
-
+import { pencil, trash } from "../../icons/icons";
 import { initialStateAlert } from "../../shared/state";
 
 import { getAllEditorial, deleteEditorial } from "../../service/editorial";
@@ -45,11 +42,11 @@ const Editorial = () => {
         extra: (id) => (
             <>
                 <button className="separation transparent" onClick={() => handelEditoralDelete(id)}>
-                    <FontAwesomeIcon  icon={faPen} />
+                    {pencil}
                 </button>
                 
                 <button className="separation transparent" disabled={loadingDelete } onClick={() => handelEditoralDelete(id)}>
-                    <FontAwesomeIcon  icon={faTrash} />
+                    {trash}
                 </button>
                 
             </>

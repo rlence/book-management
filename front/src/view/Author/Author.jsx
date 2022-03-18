@@ -2,10 +2,7 @@ import React, {useEffect, useState} from "react";
 
 
 import Content from "../../components/Content/Content";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
-
+import { pencil, trash } from "../../icons/icons";
 import { initialStateAlert } from "../../shared/state";
 
 import { getAllAuthor, deleteAuhor } from "../../service/author";
@@ -48,11 +45,11 @@ const Author = () => {
         extra: (id) => (
             <>
                 <button className="separation transparent" onClick={() => handelAuthorDelete(id)}>
-                    <FontAwesomeIcon  icon={faPen} />
+                    {pencil}
                 </button>
                 
                 <button className="separation transparent" disabled={loadingDelete } onClick={() => handelAuthorDelete(id)}>
-                    <FontAwesomeIcon  icon={faTrash} />
+                    {trash}
                 </button>
                 
             </>

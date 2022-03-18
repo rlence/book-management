@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../../App.scss";
-
-import Table from "../../components/Table/Table";
-import Card from "../../components/Card/Card";
-import Spinner from "../../components/Spinner/Spinner";
-import Alert from "../../components/Alert/Alert";
-
 import Content from "../../components/Content/Content";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
-
 import { getBooks, deletedBook } from "../../service/book";
+import { pencil, trash } from "../../icons/icons";
 
 import { initialStateAlert } from "../../shared/state";
 
@@ -66,11 +57,11 @@ const Book = () => {
         extra: (id) => (
             <>
                 <button className="separation transparent" onClick={() => handelBookDelete(id)}>
-                    <FontAwesomeIcon  icon={faPen} />
+                    {pencil}
                 </button>
                 
                 <button className="separation transparent" disabled={loadingDelete } onClick={() => handelBookDelete(id)}>
-                    <FontAwesomeIcon  icon={faTrash} />
+                    {trash}
                 </button>
                 
             </>
