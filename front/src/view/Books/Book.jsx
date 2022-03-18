@@ -8,17 +8,23 @@ import moment from "moment";
 import Card from "../../components/Card/Card";
 import Spinner from "../../components/Spinner/Spinner";
 
-import { getBooks } from "../../service/book";
+import { getBooks, deletedBook } from "../../service/book";
+
+const initialStateError = {
+    status: false,
+    message: ""
+}
 
 const Book = () => {
 
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
+    const [error, setError] = useState(initialStateError);
 
     const headTable = ["id", "Title", "Genre", "Publication Date", "Editorial", "Authors", "Status"];
 
     useEffect(() => {
+        console.log("get book")
         getBooks()
             .then(response => response.json())
             .then( data => {
@@ -40,12 +46,26 @@ const Book = () => {
             .finally(() => setLoading(false));
     },[]);
 
+    const handelBookDelete = (id) => {
+        deletedBook(1)
+            .then( res =>res.json())
+            .catch(err => {
+                console.log(err, "errR")
+                if(err.status === 500){
+                    setError({status:true, message:"Ops! se produjo un error"})
+                }
+                setError({status:true, message:err.message})
+            });
+    }
+
     const printAuhtors = (authors) => {
         return authors.map( author => <>
             <span className="separation">{author.Author.name}</span>
             <span className="separation">{author.Author.lastname}</span>
         </> )
     }
+
+    console.log(error)
     return(
         <div className="book-content">
             <h1>Book</h1>
@@ -73,10 +93,10 @@ const Book = () => {
                                     </td>
                                     <td>
                                        <span className="separation">
-                                            <FontAwesomeIcon onClick={() => console.log("en el icono")} icon={faPen} />
+                                            <FontAwesomeIcon onClick={() => handelBookDelete(book.id)} icon={faPen} />
                                        </span>
                                         <span className="separation">
-                                            <FontAwesomeIcon onClick={() => console.log("en el icono")} icon={faTrash} />
+                                            <FontAwesomeIcon onClick={() => handelBookDelete(book.id)} icon={faTrash} />
                                         </span>
                                     </td>
                                 </tr>
@@ -90,7 +110,9 @@ const Book = () => {
                 <Spinner />
             </Card>
             }
-            
+            <div>
+                <button className="btn btn-primary">+ Book</button>
+            </div>
         </div>
     )
 
