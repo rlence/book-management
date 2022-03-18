@@ -2,6 +2,7 @@
 
 .layout {
 
+    padding-left: 0px;
     height: 100vh;
 
     .aside-menu{
@@ -11,5 +12,6 @@
     
     .content{
         background-color: a.$backGround;
+        padding: 0px;
     }
 }

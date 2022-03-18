@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
-import "./Book.scss";
+import "../../App.scss";
 
 import Table from "../../components/Table/Table";
 import Card from "../../components/Card/Card";
 import Spinner from "../../components/Spinner/Spinner";
 import Alert from "../../components/Alert/Alert";
 
+import Content from "../../components/Content/Content";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { getBooks, deletedBook } from "../../service/book";
 
-const initialStateAlert = {
-    status: false,
-    message: "",
-    type: ""
-}
+import { initialStateAlert } from "../../shared/state";
 
 const Book = () => {
 
@@ -88,25 +86,7 @@ const Book = () => {
     },[]);
 
     return(
-        <div className="book-content">
-            { alert.status ? <Alert text={alert.message} type={alert.type} />: null }
-            <div>
-                <h1>Books</h1>
-            </div>
-            { !loading ? <div>
-                <Card>
-                    <Table columns={columns} dataSource={books}  />
-                </Card>
-                
-            </div> :
-            <Card>
-                <Spinner />
-            </Card>
-            }
-            <div>
-                <button className="btn btn-primary">+ Book</button>
-            </div>
-        </div>
+        <Content alert={alert} loading={loading} columns={columns} dataSource={books} text={"Books"} />
     )
 
 }

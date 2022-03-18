@@ -1,0 +1,12 @@
+@use "../../App.scss" as a;
+
+.view-content{
+    width: 100%;
+    padding: 5rem;
+
+    .transparent{
+        background-color: a.$transparent;
+        border: none;
+    }
+
+}
