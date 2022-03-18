@@ -1,11 +1,11 @@
 import { BASE_URL } from "./index";
 
-const PREFIX = "/editorial";
-const EDITORIAL_URL = `${BASE_URL}${PREFIX}`;
+const PREFIX = "/author";
+const AUTHOR_URL = `${BASE_URL}${PREFIX}`;
 
-export const getAllEditorial = async () => {
+export const getAllAuthor = async () => {
     try{
-        const res = await fetch(EDITORIAL_URL);
+        const res = await fetch(AUTHOR_URL);
         const data = await res.json();
         return Promise.resolve(data.body);
 
@@ -15,9 +15,9 @@ export const getAllEditorial = async () => {
     }
 }
 
-export const deleteEditorial = async (id) => {
+export const deleteAuhor = async (id) => {
     try{
-        const res = await fetch(`${EDITORIAL_URL}/${id}`, {
+        const res = await fetch(`${AUTHOR_URL}/${id}`, {
             method:"DELETE"
         });
         const data = await res.json();

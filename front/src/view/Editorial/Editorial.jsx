@@ -21,10 +21,10 @@ const Editorial = () => {
         console.log(id)
         setLoadingDelete(true);
         try{
-            await deleteEditorial(id);
+            const { body } = await deleteEditorial(id);
             const updateEditorial= editorial.filter(book => book.id !== id);
             setEditorial(updateEditorial);
-            setAlert({status: true, message: "editoal borrada", type:"succes"});
+            setAlert({status: true, message: body.message, type:"succes"});
           
         }catch(err){
             setAlert({status: true, message: err, type:"error"});
