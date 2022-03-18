@@ -69,7 +69,7 @@ export const deletedAuthor = async (authorId) => {
         if(!authorDeleted){
             return errorObject(404, "The author not exist");
         }
-        t.commit()
+       
         return {
             id: authorId,
             message: "Author is deleted"

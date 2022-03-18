@@ -11,25 +11,31 @@ import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { getBooks, deletedBook } from "../../service/book";
 
-const initialStateError = {
+const initialStateAlert = {
     status: false,
-    message: ""
+    message: "",
+    type: ""
 }
 
 const Book = () => {
 
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(initialStateError);
+    const [alert, setAlert] = useState(initialStateAlert);
+    const [loadingDelete, setLoadingDelete] = useState(false)
 
     const handelBookDelete = async (id) => {
+        setLoadingDelete(true);
         try{
-            const data = await deletedBook(1);
-            console.log(data)
+            const data = await deletedBook(id);
+            const updateBook = books.filter(book => book.id !== id);
+            setBooks(updateBook);
+            setAlert({status: true, message: data.body.message, type:"succes"});
           
         }catch(err){
-            console.log(err, "en el error")
-            setError({status: true, message: err});
+            setAlert({status: true, message: err, type:"error"});
+        }finally{
+            setLoadingDelete(false);
         }
       
     }
@@ -61,12 +67,14 @@ const Book = () => {
         type: "",
         extra: (id) => (
             <>
-                <span className="separation">
-                    <FontAwesomeIcon onClick={() => handelBookDelete(id)} icon={faPen} />
-                </span>
-                <span className="separation">
-                    <FontAwesomeIcon onClick={() => handelBookDelete(id)} icon={faTrash} />
-                </span>
+                <button className="separation transparent" onClick={() => handelBookDelete(id)}>
+                    <FontAwesomeIcon  icon={faPen} />
+                </button>
+                
+                <button className="separation transparent" disabled={loadingDelete } onClick={() => handelBookDelete(id)}>
+                    <FontAwesomeIcon  icon={faTrash} />
+                </button>
+                
             </>
         )
     }
@@ -75,13 +83,13 @@ const Book = () => {
     useEffect(() => {
         getBooks()
             .then(data => setBooks(data))
-            .catch( () => setError({status: true, message: "An error has occurred, try again later"}))
+            .catch( () => setAlert({status: true, message: "An error has occurred, try again later"}))
             .finally(() => setLoading(false));
     },[]);
-    console.log(error)
+
     return(
         <div className="book-content">
-            { error.status ? <Alert text={error.message} type="error"/>: null }
+            { alert.status ? <Alert text={alert.message} type={alert.type} />: null }
             <div>
                 <h1>Books</h1>
             </div>

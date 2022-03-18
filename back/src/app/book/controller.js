@@ -63,7 +63,6 @@ export const createBook = async (body) => {
         const book = await BookRepository.creatBook(newBook);
         const newBookAuthot = authorsId.map(author => ({bookId: book.id, authorId: author}) );
         await BookAutorRopository.createRelationBookAuthor(newBookAuthot);
-        await t.commit();
         return newBook;
         
     }catch(err){
@@ -117,7 +116,6 @@ export const  deleteBook = async (id) => {
         if(!deleteBook){
             return errorObject(404, "Not book find to deleted")
         }
-        await t.commit();
         return {
             id,
             message: "Book deleted"
