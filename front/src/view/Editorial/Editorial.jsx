@@ -8,53 +8,37 @@ import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { initialStateAlert } from "../../shared/state";
 
-import { getBooks, deletedBook } from "../../service/book";
+import { getAllEditorial, deleteEditorial } from "../../service/editorial";
 
 const Editorial = () => {
 
-    const [books, setBooks] = useState([]);
+    const [editorial, setEditorial] = useState([]);
     const [loading, setLoading] = useState(true);
     const [alert, setAlert] = useState(initialStateAlert);
     const [loadingDelete, setLoadingDelete] = useState(false)
 
     const handelEditoralDelete = async (id) => {
+        console.log(id)
         setLoadingDelete(true);
         try{
-            const data = await deletedBook(id);
-            const updateBook = books.filter(book => book.id !== id);
-            setBooks(updateBook);
-            setAlert({status: true, message: data.body.message, type:"succes"});
+            await deleteEditorial(id);
+            const updateEditorial= editorial.filter(book => book.id !== id);
+            setEditorial(updateEditorial);
+            setAlert({status: true, message: "editoal borrada", type:"succes"});
           
         }catch(err){
             setAlert({status: true, message: err, type:"error"});
         }finally{
             setLoadingDelete(false);
         }
-      
     }
 
     const columns = [{
         title: "id",
         type: "id"
     },{
-        title: "Title",
-        type: "title",
-    },{
-        title: "Genre",
-        type: "genre",
-    },{
-        title: "Publication Date",
-        type:"publicationDate",
-    },{
-        title: "Editorial",
-        type:"editorial",
-    },{
-        title: "Authors",
-        type:"authors",
-        extra:["name", "lastname"]
-    },{
-        title: "Status",
-        type:"status",
+        title: "Editorial Name",
+        type: "editorialName",
     },{
         title: "",
         type: "",
@@ -74,14 +58,14 @@ const Editorial = () => {
     ];
 
     useEffect(() => {
-        getBooks()
-            .then(data => setBooks(data))
+        getAllEditorial()
+            .then(data => setEditorial(data))
             .catch( () => setAlert({status: true, message: "An error has occurred, try again later"}))
             .finally(() => setLoading(false));
     },[]);
 
     return(
-        <Content alert={alert} loading={loading} columns={columns} dataSource={books} text={"Editorial"} />
+        <Content alert={alert} loading={loading} columns={columns} dataSource={editorial} text={"Editorial"} />
     )
 
 }

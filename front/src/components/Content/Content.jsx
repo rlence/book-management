@@ -8,6 +8,7 @@ import Spinner from "../Spinner/Spinner";
 
 
 const Content = ({alert, loading, columns, dataSource, text}) => {
+
     return (
         <div className="view-content">
             { alert.status ? <Alert text={alert.message} type={alert.type} />: null }
@@ -25,7 +26,7 @@ const Content = ({alert, loading, columns, dataSource, text}) => {
             </Card>
             }
             <div>
-                <button className="btn btn-primary">+ {text}</button>
+                <button className="btn btn-primary"> Create {text}</button>
             </div>
         </div>
     )
