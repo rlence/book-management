@@ -3,10 +3,16 @@ import seedAuthor from "./author";
 import seedBook from "./book";
 import seedBookAuthor from "./bookAuthor";
 
-const seed = () => {
-    Promise.all([seedEditorial(), seedAuthor(), seedBook(), seedBookAuthor()])
-        .then(() => console.log("SEED SUBIDO"))
-        .catch(err => console.log("ERROR AL SUBIR SEED", err))
+const seed = async () => {
+    try{
+        await seedEditorial();
+        await seedAuthor();
+        await seedBook();
+        await seedBookAuthor();
+        console.log("Seed successfully inserted")
+    }catch(err){
+        console.log("[ERROR TO INSERT SEED]:", err)
+    }
 }
 
 export default seed;

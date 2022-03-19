@@ -25,6 +25,7 @@ export const asyncModel =  async () => {
         Author.hasMany(BookAuthor, {foreingKey: 'book_id' , sourceKey: 'id'});
 
         await sequelize.sync({ force: forceSequileze });
+
         if(ENVIROMENT === "development"){
             await seed();
         }

@@ -23,8 +23,14 @@ services:
       - postgres
     ports:
       - "4000:4000"
-    env_file:
-       - .env
+    environment:
+      - PORT=4000
+      - POSTGRES_USER=rlence
+      - POSTGRES_PASSWORD=rlencepassword
+      - POSTGRES_PORT=5432
+      - POSTGRES_DATABASE=postgres
+      - POSTGRES_HOST=postgres
+      - NODE_ENV=development
 
   front:
     container_name: front
