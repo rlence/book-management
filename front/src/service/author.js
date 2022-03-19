@@ -44,6 +44,9 @@ export const createAuthor = async (author) => {
         });
 
         const data = await res.json();
+        if(res.status >= 400){
+            return Promise.reject(data.message)
+        }
         return Promise.resolve(data)
     }catch(err){
         console.log(err);
@@ -62,6 +65,9 @@ export const putAuthor = async (author, id) => {
         });
 
         const data = await res.json();
+        if(res.status >= 400){
+            return Promise.reject(data.message)
+        }
         return Promise.resolve(data)
     }catch(err){
         console.log(err);
