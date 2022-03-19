@@ -4,31 +4,27 @@ $heigthLogo: 200px;
 
 .nav-bar{
     width: 100%;
-
-    .column{
-        display: flex;
-        flex-direction: column;
-    }
-
     height: a.$maxHeig;
 
     .logo{
         width: 100%;
         height: $heigthLogo;
         padding-top: 2rem;
-
-        .logo-im{
+        text-align: center;
+        
+        .logo-img{
             width: 80%;
         }
+    
     }
 
+    
     .nav-menu{
         width: 100%;
-        
-
+    
         .active{
             color: a.$textSecond !important;
-            background-color: a.$optional2;
+            background-color: a.$backGround;
         }
     
         .link{  
@@ -36,8 +32,10 @@ $heigthLogo: 200px;
             text-decoration: none;
             color: a.$textFirst;
             text-align: left;
-            padding-left: 20px;
+            margin-left: 20px;
+            padding-left: 10px;
             height: 40px;
+            font-weight: bold;
             
             span{
                 display: table-cell;
@@ -49,6 +47,9 @@ $heigthLogo: 200px;
             color: a.$optional1;
         }
     }
+}
 
-    
+.column{
+    display: flex;
+    flex-direction: column;
 }

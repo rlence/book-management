@@ -7,7 +7,7 @@ const Navbar = () => {
     return (
         <div className="nav-bar column">
             <div className="logo">
-                <img className="logo-img" src="https://res.cloudinary.com/dmmdulrrv/image/upload/v1647701010/Frame_2_xfilwe.png" alt="logo"></img>
+                <img className="logo-img" src="https://res.cloudinary.com/dmmdulrrv/image/upload/v1647718316/Frame_2_1_zsyumn.png" alt="logo"></img>
             </div>
             <div className="nav-menu column">
                 <NavLink className="link" exact={"true"} to="/">

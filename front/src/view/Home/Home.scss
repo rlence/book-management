@@ -1,0 +1,22 @@
+.content-home{
+    padding: 5rem;
+    display: table;
+    width: 100%;
+    text-align: center;
+    height: 100vh;
+
+    .header{
+        display: table-cell;
+        vertical-align: middle;
+
+        .logo-home{
+            width: 30%;
+        }
+
+        .title-home{
+        
+            text-align: center;
+        }
+    }
+    
+}
