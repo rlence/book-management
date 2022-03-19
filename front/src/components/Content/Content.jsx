@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Content.scss";
 
 import Card from "../Card/Card";
@@ -8,12 +9,16 @@ import Spinner from "../Spinner/Spinner";
 
 
 const Content = ({alert, loading, columns, dataSource, text}) => {
-
+    const navigate = useNavigate();
+    
     return (
         <div className="view-content">
-            { alert.status ? <Alert text={alert.message} type={alert.type} />: null }
-            <div>
+            
+            <div className="title">
                 <h1>{text}</h1>
+            </div>
+            <div className="alert-content">
+                { alert.status ? <Alert text={alert.message} type={alert.type} />: null }
             </div>
             { !loading ? <div>
                 <Card>
@@ -25,8 +30,10 @@ const Content = ({alert, loading, columns, dataSource, text}) => {
                 <Spinner />
             </Card>
             }
-            <div>
-                <button className="btn btn-primary"> Create {text}</button>
+            <div className="content-button">
+                <button className="btn"
+                    onClick={() => navigate(`/create/${text.toLowerCase()}`) }
+                > Create {text}</button>
             </div>
         </div>
     )

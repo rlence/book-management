@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "../../App.scss";
-
+import { useNavigate } from "react-router-dom";
 import Content from "../../components/Content/Content";
 import { pencil, trash } from "../../icons/icons";
 import { initialStateAlert } from "../../shared/state";
@@ -8,6 +8,7 @@ import { initialStateAlert } from "../../shared/state";
 import { getAllEditorial, deleteEditorial } from "../../service/editorial";
 
 const Editorial = () => {
+    const navigate = useNavigate();
 
     const [editorial, setEditorial] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -41,7 +42,7 @@ const Editorial = () => {
         type: "",
         extra: (id) => (
             <>
-                <button className="separation transparent" onClick={() => handelEditoralDelete(id)}>
+                <button className="separation transparent" onClick={() => navigate(`/edit/editorial/${id}`)}>
                     {pencil}
                 </button>
                 

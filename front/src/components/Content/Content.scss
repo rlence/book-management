@@ -4,9 +4,28 @@
     width: 100%;
     padding: 5rem;
 
+    .title{
+        margin-bottom: 2rem;
+    }
+
     .transparent{
         background-color: a.$transparent;
         border: none;
+    }
+
+    .alert-content{
+        margin-bottom: 1rem;
+    }
+
+    .content-button{
+        margin-top: 1.5rem;
+        text-align: right;
+
+        button{
+            border-color: a.$buttonsTypeB;
+            background-color: a.$buttonsTypeB;
+            color: a.$textFirst;
+        }
     }
 
 }

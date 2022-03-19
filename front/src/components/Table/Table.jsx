@@ -24,7 +24,7 @@ const Table = ({ columns, dataSource }) => {
       return "-";
     }
     
-    if(typeof source == "object"){
+    if(typeof source === "object"){
       return source[extra[0]]
     }
     

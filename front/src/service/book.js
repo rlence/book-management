@@ -22,7 +22,6 @@ export const getBooks = async () => {
                 lastname: author.Author.lastname,
             }))
         }));
-        console.log(listBook)
         return Promise.resolve(listBook);
 
     }catch(err){
@@ -30,6 +29,20 @@ export const getBooks = async () => {
         return Promise.reject(err);
     }
     
+}
+
+export const getBook = async (id) => {
+    try{
+        const res = await fetch(`${BOOK_URL}/${id}`);
+        const data = await res.json();
+
+        console.log(data)
+        return Promise.resolve(data);
+
+    }catch(err){
+        console.log(err);
+        return Promise.reject(err);
+    }
 }
 
 export const deletedBook =  async (id) => {

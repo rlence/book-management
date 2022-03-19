@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../App.scss";
+import { useNavigate } from "react-router-dom";
+
 import Content from "../../components/Content/Content";
 import { getBooks, deletedBook } from "../../service/book";
 import { pencil, trash } from "../../icons/icons";
@@ -7,6 +9,7 @@ import { pencil, trash } from "../../icons/icons";
 import { initialStateAlert } from "../../shared/state";
 
 const Book = () => {
+    const navigate = useNavigate();
 
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -57,7 +60,7 @@ const Book = () => {
         type: "",
         extra: (id) => (
             <>
-                <button className="separation transparent" onClick={() => handelBookDelete(id)}>
+                <button className="separation transparent" onClick={() => navigate(`/edit/book/${id}`)}>
                     {pencil}
                 </button>
                 

@@ -34,7 +34,7 @@ export const createEditorial = async (body) => {
 
     }catch(err){
         console.log("[ERROR CREATE EDITORIAL]:", err);
-        if(err.errors[0]?.message == "editorial_name must be unique"){
+        if(err.errors[0]?.message === "editorial_name must be unique"){
             return errorObject(409, "the editorial already exists");
         }
         return errorObject(500);

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-
+import { useNavigate } from "react-router-dom";
 
 import Content from "../../components/Content/Content";
 import { pencil, trash } from "../../icons/icons";
@@ -8,6 +8,7 @@ import { initialStateAlert } from "../../shared/state";
 import { getAllAuthor, deleteAuhor } from "../../service/author";
 
 const Author = () => {
+    const navigate = useNavigate();
 
     const [authors, setAuthors] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -44,7 +45,7 @@ const Author = () => {
         type: "",
         extra: (id) => (
             <>
-                <button className="separation transparent" onClick={() => handelAuthorDelete(id)}>
+                <button className="separation transparent" onClick={() => navigate(`/edit/author/${id}`)}>
                     {pencil}
                 </button>
                 
