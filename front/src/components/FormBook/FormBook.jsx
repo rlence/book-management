@@ -28,6 +28,8 @@ const FormBook = ({book, setBook, submit}) => {
 
     const [errors, setErros] = useState("");
 
+    const [showCalendar, setShowCalendar] = useState(false);
+
     const getData = async () => {
         try{
             const dataEditorial = await getAllEditorial();
@@ -46,25 +48,21 @@ const FormBook = ({book, setBook, submit}) => {
         getData();
     },[]);
 
-    const handelAuthors = (id, mode) => {
-        if(mode === "add"){
-            const auhorExist = authorsSelected.find( author => author.id == id);
-            if(auhorExist) return;
-            const auhtorSeleted = listAuthor.find( author => author.id == id);
-            setAuthorsSelerect([...authorsSelected, auhtorSeleted]);
-        }else{
-            const authorDelete = authorsSelected.filter( author => author.id !== id);
-            setAuthorsSelerect(authorDelete);
-        }
+    const deleteAuthors = (id) => {
+       
+        const authorDelete = authorsSelected.filter( author => author.id !== id);
+        setAuthorsSelerect(authorDelete);
+        
     }
 
     const handelChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         if(name === "auhtorsId"){
-            const authorsSelected = [...book.authorsId, parseInt(value)]
+   
+            if(book.authorsId.includes(parseInt(value))) return;
+            const authorsSelected = [...book.authorsId, parseInt(value)];
             setBook({...book, authorsId: authorsSelected})
-            handelAuthors(value, "add" )
         }else{
             const transformValue = name === "editorialId" ? parseInt(value) : value;
             setBook({...book, [name]: transformValue });
@@ -73,7 +71,8 @@ const FormBook = ({book, setBook, submit}) => {
 
     const handelDate = (e) => {
         setDate(e)
-        setBook({...book, publicationDate: moment(e).format("YYYY/MM/DD")})
+        setBook({...book, publicationDate: moment(e).format("YYYY/MM/DD")});
+        setShowCalendar(false)
     }
 
     const handelSubmit = async (e) => {
@@ -95,7 +94,7 @@ const FormBook = ({book, setBook, submit}) => {
         return listAuthor.map( author => {
             if(author.id === authorId){
                 return (
-                    <span className="author-select" key={author.id}>{author.name} {author.lastname} <span onClick={() => handelAuthors(author.id, "delete")} className="icon">{x}</span></span>
+                    <span className="author-select" key={author.id}>{author.name} {author.lastname} <span onClick={() => deleteAuthors(author.id)} className="icon">{x}</span></span>
                 )
             } 
         })
@@ -112,12 +111,14 @@ const FormBook = ({book, setBook, submit}) => {
             </div>
 
             <div className="input-group input-group-sm mb-3 dropdown">
-                <p className="form-control" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <p className="form-control" onClick={() => setShowCalendar(true)}>
                     {book.publicationDate === "" ? "Seletec a publication date" : book.publicationDate}
                 </p>
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <Calendar onChange={handelDate} value={date} />
-                </ul>
+                { showCalendar ? 
+                    <ul className="calendar-form">
+                        <Calendar onChange={handelDate} value={date} />
+                    </ul> 
+                : null}
                 
             </div>
 
