@@ -44,7 +44,7 @@ const FormBook = ({book, setBook, submit}) => {
 
     useEffect(() => {
         getData();
-    },[])
+    },[]);
 
     const handelAuthors = (id, mode) => {
         if(mode === "add"){
@@ -80,26 +80,29 @@ const FormBook = ({book, setBook, submit}) => {
         try{
             e.preventDefault();
             setLoading({...loading, book: true});
-            console.log({book})
-            console.log(book.publicationDate !== "" )
             if(book.title !== "" && book.genre !== "" && book.publicationDate !== "" && book.editorialId !== 0 && book.authorsId.length > 0){
                 console.log('dentro del if')
                 await submit();
             }
-
             setErros("all fields are required");
             
         }finally{
             setLoading({...loading, book: false});
         }
-        
     }
 
+    const handelPrintAuhtorSelected = (authorId) => {
+        return listAuthor.map( author => {
+            if(author.id === authorId){
+                return (
+                    <span className="author-select" key={author.id}>{author.name} {author.lastname} <span onClick={() => handelAuthors(author.id, "delete")} className="icon">{x}</span></span>
+                )
+            } 
+        })
+    }
+   
     return (
         <form className="form-book" onChange={handelChange} onSubmit={handelSubmit}>
-
-            <h2 className="title">Create Book</h2>
-
             <div className="input-group input-group-sm mb-3">
                 <input type="text" defaultValue={book.title} className="form-control" placeholder="title" name="title" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
             </div>
@@ -137,7 +140,7 @@ const FormBook = ({book, setBook, submit}) => {
             }
 
             <div className="list-author">
-                { !authorsSelected.length ?<span> No authores selected </span> : authorsSelected.map( author => <span className="author-select" key={author.id}>{author.name} {author.lastname} <span onClick={() => handelAuthors(author.id, "delete")} className="icon">{x}</span></span>)}
+                { !book.authorsId.length ?<span> No authores selected </span> : book.authorsId.map( authorId => handelPrintAuhtorSelected(authorId))}
             </div>
 
            {!loading.book ?  <button className="btn save-btn"> Save </button> : <Spinner />}

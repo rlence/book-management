@@ -34,10 +34,18 @@ export const getBooks = async () => {
 export const getBook = async (id) => {
     try{
         const res = await fetch(`${BOOK_URL}/${id}`);
-        const data = await res.json();
-
-        console.log(data)
-        return Promise.resolve(data);
+        const { body } = await res.json();
+        const book = {
+            id: body.id,
+            genre: body.genre,
+            publicationDate: moment(body.publicationDate).format("DD-MM-YYYY"),
+            status: body.status,
+            title: body.title,
+            is_active: body.is_active,
+            editorialId: body.EditorialId,
+            authorsId: body.BookAutors.length === 0 ? null : body.BookAutors.map( author => ( author.AuthorId))
+        }
+        return Promise.resolve(book);
 
     }catch(err){
         console.log(err);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./CreateBook.scss";
-import { useParams, useNavigate } from "react-router-dom";
+import "../../App.scss";
+import { useNavigate } from "react-router-dom";
 
 import Card from "../../components/Card/Card";
 import FormBook from "../../components/FormBook/FormBook";
@@ -28,7 +28,7 @@ const CreateBook = () => {
            await postBook(book)
            navigate("/book");
         }catch(err){
-            setErr("Se produjo un error")
+            setErr("an error occurred while creating the book")
         }
     }
 
@@ -36,6 +36,7 @@ const CreateBook = () => {
         <div className="contet-form">
             {err !== "" ? <Alert  text={err} type="error" /> : null }
             <Card>
+                <h2 className="title">Create Book</h2>
                 <FormBook book={book} setBook={setBook} submit={createBook} ></FormBook>
             </Card>
         </div>
