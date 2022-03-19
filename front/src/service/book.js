@@ -82,6 +82,9 @@ export const postBook = async (book) => {
         });
 
         const data = await res.json();
+        if(res.status >= 400){
+            return Promise.reject(data.message)
+        }
         return Promise.resolve(data);
     }catch(err){
         console.log(err);
@@ -100,6 +103,9 @@ export const updateBook = async (book, id) => {
         });
 
         const data = await res.json();
+        if(res.status >= 400){
+            return Promise.reject(data.message)
+        }
         return Promise.resolve(data)
     }catch(err){
         console.log(err);
