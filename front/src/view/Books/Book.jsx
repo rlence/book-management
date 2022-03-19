@@ -33,7 +33,7 @@ const Book = () => {
     }
 
     const columns = [{
-        title: "id",
+        title: "ID",
         type: "id"
     },{
         title: "Title",

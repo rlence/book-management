@@ -62,3 +62,21 @@ export const deletedBook =  async (id) => {
         return Promise.reject(err);
     }
 }
+
+export const postBook = async (book) => {
+    try{
+        const res = await fetch(`${BOOK_URL}`, {
+            method:"POST",
+            body: JSON.stringify(book),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        });
+
+        const data = await res.json();
+        return Promise.resolve(data);
+    }catch(err){
+        console.log(err);
+        Promise.reject(err);
+    }
+}

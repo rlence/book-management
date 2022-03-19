@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./FormBook.scss";
 
 import Spinner from "../Spinner/Spinner";
+import Alert from "../Alert/Alert";
 
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -19,14 +20,13 @@ const FormBook = ({book, setBook, submit}) => {
     const [listAuthor, setListAuthor] = useState([]);
     const [loading, setLoading] = useState({
         author: true,
-        editorial: true
+        editorial: true,
+        book: false,
     });
 
     const [authorsSelected, setAuthorsSelerect] = useState([]);
 
-    const [errors, setErros] = useState({
-
-    });
+    const [errors, setErros] = useState("");
 
     const getData = async () => {
         try{
@@ -54,7 +54,6 @@ const FormBook = ({book, setBook, submit}) => {
             setAuthorsSelerect([...authorsSelected, auhtorSeleted]);
         }else{
             const authorDelete = authorsSelected.filter( author => author.id !== id);
-            console.log(authorDelete)
             setAuthorsSelerect(authorDelete);
         }
     }
@@ -63,21 +62,37 @@ const FormBook = ({book, setBook, submit}) => {
         const name = e.target.name;
         const value = e.target.value;
         if(name === "auhtorsId"){
-            const authorsSelected = [...book.authorsId, value]
+            const authorsSelected = [...book.authorsId, parseInt(value)]
             setBook({...book, authorsId: authorsSelected})
             handelAuthors(value, "add" )
         }else{
-            setBook({...book, [name]: value});
+            const transformValue = name === "editorialId" ? parseInt(value) : value;
+            setBook({...book, [name]: transformValue });
         }
     }
 
     const handelDate = (e) => {
         setDate(e)
-        setBook({...book, publicationDate: moment(e).format("DD-MM-YYYY")})
+        setBook({...book, publicationDate: moment(e).format("YYYY/MM/DD")})
     }
 
-    const handelSubmit = (e) => {
-        e.preventDefault();
+    const handelSubmit = async (e) => {
+        try{
+            e.preventDefault();
+            setLoading({...loading, book: true});
+            console.log({book})
+            console.log(book.publicationDate !== "" )
+            if(book.title !== "" && book.genre !== "" && book.publicationDate !== "" && book.editorialId !== 0 && book.authorsId.length > 0){
+                console.log('dentro del if')
+                await submit();
+            }
+
+            setErros("all fields are required");
+            
+        }finally{
+            setLoading({...loading, book: false});
+        }
+        
     }
 
     return (
@@ -114,7 +129,7 @@ const FormBook = ({book, setBook, submit}) => {
 
             {loading.author ? <Spinner /> :
                 (
-                    <select className="form-select mb-3" name="auhtorsId" defaultValue={0}>
+                    <select className="form-select mb-3" name="auhtorsId" value={0} defaultValue={0}>
                         <option value={0}>Select Author</option>
                         {listAuthor.map( author => <option key={author.id} value={author.id} >{author.name} {author.lastname}  </option>)}
                     </select>
@@ -125,8 +140,9 @@ const FormBook = ({book, setBook, submit}) => {
                 { !authorsSelected.length ?<span> No authores selected </span> : authorsSelected.map( author => <span className="author-select" key={author.id}>{author.name} {author.lastname} <span onClick={() => handelAuthors(author.id, "delete")} className="icon">{x}</span></span>)}
             </div>
 
-            <button className="btn save-btn"> Save </button>
+           {!loading.book ?  <button className="btn save-btn"> Save </button> : <Spinner />}
             
+            {errors === "" ? null : <Alert text={errors} type="error" /> }
 
         </form>
     )
