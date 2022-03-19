@@ -5,7 +5,7 @@ import "./Layout.scss";
 const Layout = (props) => {
 
     return (
-        <div className="row layout">
+        <div className="layout">
             <div className="col-2 aside-menu">
                 <Navbar />
             </div>

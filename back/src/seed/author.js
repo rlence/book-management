@@ -7,7 +7,7 @@ const seedAuthor = () => {
             lastname:"Martin"
         },
         {
-            name: "Miguel de",
+            name: "Miguel",
             lastname:"Cervantes"
         },
         {

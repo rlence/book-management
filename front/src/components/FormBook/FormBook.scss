@@ -1,7 +1,43 @@
+@use "../../App.scss" as a;
+
 .form-book{
     padding: 4rem;
 
     .title{
         margin-bottom: 1.5rem;
     }
+
+    .list-author{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+       
+        .author-select{
+            padding-left: 0.5rem;
+            background-color: a.$tagSucces;
+            color: a.$textSucces;
+            margin-right: 0.5rem;
+            padding: 5px;
+            border-radius: .5rem;
+            margin-top: 0.5rem;
+    
+            .icon{
+                svg{
+                    width: 1rem;
+                }
+             }
+         
+             .icon:hover{
+                 cursor: pointer;
+             }
+        }
+    }
+
+    .save-btn{
+        width: 100%;
+        margin-top: 1rem;
+        background-color: a.$buttonsTypeB;
+        color: a.$textSecond;
+    }
+
 }

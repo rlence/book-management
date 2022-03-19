@@ -15,6 +15,11 @@ $heigthLogo: 200px;
     .logo{
         width: 100%;
         height: $heigthLogo;
+        padding-top: 2rem;
+
+        .logo-im{
+            width: 80%;
+        }
     }
 
     .nav-menu{

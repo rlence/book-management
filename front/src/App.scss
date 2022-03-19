@@ -4,7 +4,7 @@ $error: #B92222;
 
 //button component 
 $buttonTypeA: #364849;
-$buttonsTypeB: #29787F;
+$buttonsTypeB: #F8D935;
 
 //backgrouds
 $backGround: #F1F3F4;
@@ -24,6 +24,14 @@ $textSecond: #364849;
 
 //transparent
 $transparent: #ffffff00;
+
+//tags
+$tagError: #F6CBCB;
+$tagSucces: #5DA93D;
+
+//text tag
+$textError: #CE7373;
+$textSucces: #C8E8BB;
 
 .transparent{
     background-color: $transparent;
