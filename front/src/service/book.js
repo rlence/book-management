@@ -11,7 +11,7 @@ export const getBooks = async () => {
         const listBook = data.body.map(book => ({
             id: book.id,
             genre: book.genre,
-            publicationDate: moment(book.publicationDate).format("DD-MM-YYYY"),
+            publicationDate: moment(book.publicationDate).format("YYYY/MM/DD"),
             status: book.status,
             title: book.title,
             is_active: book.is_active,
@@ -38,7 +38,7 @@ export const getBook = async (id) => {
         const book = {
             id: body.id,
             genre: body.genre,
-            publicationDate: moment(body.publicationDate).format("DD-MM-YYYY"),
+            publicationDate: moment(body.publicationDate).format("YYYY/MM/DD"),
             status: body.status,
             title: body.title,
             is_active: body.is_active,
