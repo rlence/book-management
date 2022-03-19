@@ -88,3 +88,21 @@ export const postBook = async (book) => {
         Promise.reject(err);
     }
 }
+
+export const updateBook = async (book, id) => {
+    try{
+        const res = await fetch(`${BOOK_URL}/${id}`, {
+            method:"PUT",
+            body: JSON.stringify(book),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        });
+
+        const data = await res.json();
+        return Promise.resolve(data)
+    }catch(err){
+        console.log(err);
+        Promise.reject(err);
+    }
+}

@@ -24,8 +24,6 @@ const FormBook = ({book, setBook, submit}) => {
         book: false,
     });
 
-    const [authorsSelected, setAuthorsSelerect] = useState([]);
-
     const [errors, setErros] = useState("");
 
     const [showCalendar, setShowCalendar] = useState(false);
@@ -49,10 +47,11 @@ const FormBook = ({book, setBook, submit}) => {
     },[]);
 
     const deleteAuthors = (id) => {
-       
-        const authorDelete = authorsSelected.filter( author => author.id !== id);
-        setAuthorsSelerect(authorDelete);
-        
+        console.log({id})
+        console.log(book.authorsId)
+        const authorDelete = book.authorsId.filter( authorId => authorId !== id);
+        console.log({authorDelete})
+        setBook({...book, authorsId: authorDelete });
     }
 
     const handelChange = (e) => {

@@ -7,7 +7,7 @@ import Card from "../../components/Card/Card";
 import FormBook from "../../components/FormBook/FormBook";
 import Alert from "../../components/Alert/Alert";
 
-import { getBook } from "../../service/book";
+import { getBook, updateBook } from "../../service/book";
 
 const initialState = {
     title: "",
@@ -32,11 +32,11 @@ const EditBook = () => {
             .catch(err => console.log(err))
     }, [])
 
-    const updateBook = async () => {
-        console.log({book})
+    const putBook = async () => {
+        console.log(book)
         try{
-           //await postBook(book)
-           //navigate("/book");
+           await updateBook(book,id)
+           navigate("/book");
         }catch(err){
             setErr("an error occurred while updating the book")
         }
@@ -49,7 +49,7 @@ const EditBook = () => {
             {err !== "" ? <Alert  text={err} type="error" /> : null }
             <Card>
                 <h2 className="title">Edit Book</h2>
-                <FormBook book={book} setBook={setBook} submit={updateBook} ></FormBook>
+                <FormBook book={book} setBook={setBook} submit={putBook} ></FormBook>
             </Card>
         </div>
     )
