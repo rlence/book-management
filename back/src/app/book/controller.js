@@ -74,14 +74,10 @@ export const createBook = async (body) => {
 export const updateBook = async (body, bookId) => {
     try{
 
-        const {title, genre, publicationDate,  editorialId, status } = body;
+        const {title, genre, publicationDate,  editorialId, authorsId } = body;
 
-        if(!title || !genre || !publicationDate || !editorialId || !status){
+        if(!title || !genre || !publicationDate || !editorialId || !authorsId.length){
             return errorObject(400);
-        }
-
-        if(!STATUS.includes(status)){
-            return errorObject(400, "Bad status selected")
         }
 
         const date = moment(publicationDate).format("YYYY-MM-DD");
@@ -90,17 +86,29 @@ export const updateBook = async (body, bookId) => {
         }
 
         const book = await BookRepository.getBook(bookId);
-        if(book.editorialId == editorialId){
-            return await BookRepository.updateBook(book, {title, genre, publicationDate, status });
+        if(!book){
+            return errorObject(400, "the book not exist");
         }
 
         const editorial = await EditorialRepository.getEditorial(editorialId);
-
         if(!editorial){
             return errorObject(400, "the editorial selected is not exist");
         }
 
-        return await BookRepository.updateBook(book, {title, genre, publicationDate,  editorialId, status });
+        const authors = await AuthorsRepository.getAuthorsByIds(authorsId);
+        if(!authors.length){
+            return errorObject(400, "the selected authors do not exist");
+        }
+        
+        if(authors.length !== authorsId.length){
+            return errorObject(400, "the selected authors do not exist");
+        }
+
+        const bookUpdate = await BookRepository.updateBook(book, {title, genre, publicationDate,  editorialId });
+        await BookAutorRopository.deleteBook(bookId);
+        const newBookAuthot = authorsId.map(author => ({bookId: book.id, authorId: author}) );
+        await BookAutorRopository.createRelationBookAuthor(newBookAuthot);
+        return bookUpdate;
 
     }catch(err){
         console.log("[ERROR UPDATE BOOK]:", err);
