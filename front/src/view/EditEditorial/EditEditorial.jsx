@@ -3,34 +3,33 @@ import "../../App.scss";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Card from "../../components/Card/Card";
-import FormAuthor from "../../components/FormAuthor/FormAuthor";
+import FormEditorial from "../../components/FormEditorial/FormEditorial";
 import Alert from "../../components/Alert/Alert";
 
-import { putAuthor, geOneAuthor } from "../../service/author";
+import { putEditorial, geOneEditorial } from "../../service/editorial";
 
 const initialState = {
-  name: "",
-  lastname: "",
+    editorialName: ""
 };
 
-const EditAhuthor = () => {
+const EditEditorial = () => {
 
-  const [author, setAuthor] = useState(initialState);
+  const [editorial, setEditorial] = useState(initialState);
   const navigate = useNavigate();
   const [err, setErr] = useState("");
 
   const { id } = useParams();
 
   useEffect(() => {
-    geOneAuthor(id)
-        .then(data => setAuthor(data))
+    geOneEditorial(id)
+        .then(data => setEditorial(data))
         .catch(err => console.log(err))
   },[])
 
   const updateAuthor = async () => {
     try {
-      await putAuthor(author, id);
-      navigate("/author");
+      await putEditorial(editorial, id);
+      navigate("/editorial");
     } catch (err) {
       setErr("an error occurred while creating the book");
     }
@@ -40,11 +39,11 @@ const EditAhuthor = () => {
     <div className="contet-form">
       {err !== "" ? <Alert text={err} type="error" /> : null}
       <Card>
-        <h2 className="title">Edit Author</h2>
-        <FormAuthor author={author} setAuthor={setAuthor} submit={updateAuthor}></FormAuthor>
+        <h2 className="title">Edit Editorial</h2>
+        <FormEditorial editorial={editorial} setEditorial={setEditorial} submit={updateAuthor}></FormEditorial>
       </Card>
     </div>
   );
 };
 
-export default EditAhuthor;
+export default EditEditorial;

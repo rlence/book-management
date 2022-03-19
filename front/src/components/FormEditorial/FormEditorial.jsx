@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import Spinner from "../Spinner/Spinner";
 import Alert from "../Alert/Alert";
 
-const FormAuthor = ({author, setAuthor, submit}) => {
+const FormEditorial = ({editorial, setEditorial, submit}) => {
 
     const [loading, setLoading] = useState(false);
     const [errors, setErros] = useState("");
@@ -11,13 +11,13 @@ const FormAuthor = ({author, setAuthor, submit}) => {
     const handelChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-        setAuthor({...author, [name]: value});
+        setEditorial({...editorial, [name]: value});
     }
 
     const handelSubmit = async (e) => {
         try{
             e.preventDefault();
-            if(author.name !== "" && author.lastname !== "" ){
+            if(editorial.editorialName !== ""){
                 setLoading(true);
                 return await submit();
             }
@@ -31,11 +31,7 @@ const FormAuthor = ({author, setAuthor, submit}) => {
     return(
         <form className="form-book" onChange={handelChange} onSubmit={handelSubmit}>
             <div className="input-group input-group-sm mb-3">
-                <input type="text" defaultValue={author.name} className="form-control" placeholder="name" name="name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
-            </div>
-
-            <div className="input-group input-group-sm mb-3">
-                <input type="text" defaultValue={author.lastname} className="form-control" placeholder="lastname" name="lastname" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
+                <input type="text" defaultValue={editorial.editorialName} className="form-control" placeholder="editorial name" name="editorialName" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
             </div>
 
            {!loading ?  <button className="btn save-btn"> Save </button> : <Spinner />}
@@ -47,4 +43,4 @@ const FormAuthor = ({author, setAuthor, submit}) => {
 
 }
 
-export default FormAuthor;
+export default FormEditorial;
