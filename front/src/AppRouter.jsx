@@ -11,6 +11,7 @@ import Editorial from "./view/Editorial/Editorial";
 import Author from "./view/Author/Author";
 import CreateBook from "./view/CreateBook/CreateBook";
 import EditBook from "./view/EditBook/EditBook";
+import CreatAhuthor from "./view/CreateAuthor/CreateAuthor";
 
 const AppRouter = () => {
 	return (
@@ -26,7 +27,7 @@ const AppRouter = () => {
             <Route exact path="/edit/book/:id" element={ <EditBook/> } />
             <Route exact path="/create/editorial" element={ <h1>create editorial</h1> } />
             <Route exact path="/edit/editorial/:id" element={ <h1>update editorial</h1> } />
-            <Route exact path="/create/authors" element={ <h1>create author</h1>} />
+            <Route exact path="/create/authors" element={ <CreatAhuthor />} />
             <Route exact path="/edit/author/:id" element={ <h1>updateEditorial author</h1>} />
           </Routes>
         </Layout>

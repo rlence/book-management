@@ -47,10 +47,7 @@ const FormBook = ({book, setBook, submit}) => {
     },[]);
 
     const deleteAuthors = (id) => {
-        console.log({id})
-        console.log(book.authorsId)
         const authorDelete = book.authorsId.filter( authorId => authorId !== id);
-        console.log({authorDelete})
         setBook({...book, authorsId: authorDelete });
     }
 

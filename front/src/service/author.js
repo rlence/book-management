@@ -32,3 +32,51 @@ export const deleteAuhor = async (id) => {
         return Promise.reject(err);
     }
 }
+
+export const createAuthor = async (author) => {
+    try{
+        const res = await fetch(`${AUTHOR_URL}`, {
+            method:"POST",
+            body: JSON.stringify(author),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        });
+
+        const data = await res.json();
+        return Promise.resolve(data)
+    }catch(err){
+        console.log(err);
+        Promise.reject(err);
+    }
+}
+
+export const putAuthor = async (author, id) => {
+    try{
+        const res = await fetch(`${AUTHOR_URL}/${id}`, {
+            method:"PUT",
+            body: JSON.stringify(author),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        });
+
+        const data = await res.json();
+        return Promise.resolve(data)
+    }catch(err){
+        console.log(err);
+        Promise.reject(err);
+    }
+}
+
+export const geOneAuthor =  async (id) => {
+    try{
+        const res = await fetch(`${AUTHOR_URL}/${id}`);
+        const data = await res.json();
+        return Promise.resolve(data.body);
+
+    }catch(err){
+        console.log(err);
+        return Promise.reject(err);
+    }
+}
