@@ -53,9 +53,6 @@ const Book = () => {
         type:"authors",
         extra:["name", "lastname"]
     },{
-        title: "Status",
-        type:"status",
-    },{
         title: "",
         type: "",
         extra: (id) => (
