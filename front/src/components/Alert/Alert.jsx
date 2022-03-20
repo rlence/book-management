@@ -4,7 +4,7 @@ import "./Alert.scss";
 const Alert = ({type, text}) => {
 
     return (
-        <div className={"alert alert-primary aler-content " + type} role="alert">
+        <div className={"alert aler-content " + type} role="alert">
             {text}
         </div>
     )

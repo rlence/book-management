@@ -16,7 +16,6 @@ const Editorial = () => {
     const [loadingDelete, setLoadingDelete] = useState(false)
 
     const handelEditoralDelete = async (id) => {
-        console.log(id)
         setLoadingDelete(true);
         try{
             const { body } = await deleteEditorial(id);

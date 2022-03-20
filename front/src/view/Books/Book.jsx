@@ -76,7 +76,7 @@ const Book = () => {
     useEffect(() => {
         getBooks()
             .then(data => setBooks(data))
-            .catch( () => setAlert({status: true, message: "An error has occurred, try again later"}))
+            .catch( () => setAlert({status: true, message: "An error has occurred, try again later", type: "error"}))
             .finally(() => setLoading(false));
     },[]);
 

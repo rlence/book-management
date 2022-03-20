@@ -33,7 +33,6 @@ const EditBook = () => {
     }, [])
 
     const putBook = async () => {
-        console.log(book)
         try{
            await updateBook(book,id)
            navigate("/book");

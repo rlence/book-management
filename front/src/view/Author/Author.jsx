@@ -16,7 +16,6 @@ const Author = () => {
     const [loadingDelete, setLoadingDelete] = useState(false)
 
     const handelAuthorDelete = async (id) => {
-        console.log(id)
         setLoadingDelete(true);
         try{
             const { body } = await deleteAuhor(id);

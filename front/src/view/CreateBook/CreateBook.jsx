@@ -23,7 +23,6 @@ const CreateBook = () => {
     const [err, setErr] = useState("")
 
     const createBook = async () => {
-        console.log({book})
         try{
            await postBook(book)
            navigate("/book");

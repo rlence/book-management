@@ -29,6 +29,11 @@
         }
     }
 
+    .select-option-book{
+        display: flex;
+        flex-direction: column;
+    }
+
     .save-btn{
         width: 100%;
         margin-top: 1rem;

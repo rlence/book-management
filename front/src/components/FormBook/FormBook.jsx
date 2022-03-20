@@ -38,7 +38,7 @@ const FormBook = ({book, setBook, submit}) => {
         }catch(err){
             console.log(err)
         }finally{
-            setLoading({ author:false, editorial:false})
+            setLoading({ author:true, editorial:true})
         }
     }
 
@@ -76,7 +76,6 @@ const FormBook = ({book, setBook, submit}) => {
             e.preventDefault();
             setLoading({...loading, book: true});
             if(book.title !== "" && book.genre !== "" && book.publicationDate !== "" && book.editorialId !== 0 && book.authorsId.length > 0){
-                console.log('dentro del if')
                 await submit();
             }
             setErros("all fields are required");
@@ -117,25 +116,25 @@ const FormBook = ({book, setBook, submit}) => {
                 : null}
                 
             </div>
+            <div className="select-option-book">
+                {loading.editorial ? <Spinner /> :
+                    (
+                        <select className="form-select mb-3" name="editorialId"  defaultValue={book.editorialId}>
+                            <option value={0}>Select Editorial</option>
+                            {listEditoral.map( editorial => <option key={editorial.id} value={editorial.id} >{editorial.editorialName}</option>)}
+                        </select>
+                    )
+                }
 
-            {loading.editorial ? <Spinner /> :
-                (
-                    <select className="form-select mb-3" name="editorialId"  defaultValue={book.editorialId}>
-                        <option value={0}>Select Editorial</option>
-                        {listEditoral.map( editorial => <option key={editorial.id} value={editorial.id} >{editorial.editorialName}</option>)}
-                    </select>
-                )
-            }
-
-            {loading.author ? <Spinner /> :
-                (
-                    <select className="form-select mb-3" name="auhtorsId" value={0} defaultValue={0}>
-                        <option value={0}>Select Author</option>
-                        {listAuthor.map( author => <option key={author.id} value={author.id} >{author.name} {author.lastname}  </option>)}
-                    </select>
-                )
-            }
-
+                {loading.author ? <Spinner /> :
+                    (
+                        <select className="form-select mb-3" name="auhtorsId" value={0} defaultValue={0}>
+                            <option value={0}>Select Author</option>
+                            {listAuthor.map( author => <option key={author.id} value={author.id} >{author.name} {author.lastname}  </option>)}
+                        </select>
+                    )
+                }
+            </div>
             <div className="list-author">
                 { !book.authorsId.length ?<span> No authores selected </span> : book.authorsId.map( authorId => handelPrintAuhtorSelected(authorId))}
             </div>
