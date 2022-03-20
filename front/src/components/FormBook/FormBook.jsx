@@ -38,7 +38,7 @@ const FormBook = ({book, setBook, submit}) => {
         }catch(err){
             console.log(err)
         }finally{
-            setLoading({ author:true, editorial:true})
+            setLoading({ author:false, editorial:false})
         }
     }
 
